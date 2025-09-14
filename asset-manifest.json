@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/pos-billing/static/css/main.d06e71a6.css",
-    "main.js": "/pos-billing/static/js/main.876ff8d0.js",
+    "main.js": "/pos-billing/static/js/main.aedfb5b7.js",
     "static/js/239.611fd2dc.chunk.js": "/pos-billing/static/js/239.611fd2dc.chunk.js",
     "static/js/977.31f774cd.chunk.js": "/pos-billing/static/js/977.31f774cd.chunk.js",
     "static/js/455.85ef5917.chunk.js": "/pos-billing/static/js/455.85ef5917.chunk.js",
     "static/js/453.24a99858.chunk.js": "/pos-billing/static/js/453.24a99858.chunk.js",
     "index.html": "/pos-billing/index.html",
     "main.d06e71a6.css.map": "/pos-billing/static/css/main.d06e71a6.css.map",
-    "main.876ff8d0.js.map": "/pos-billing/static/js/main.876ff8d0.js.map",
+    "main.aedfb5b7.js.map": "/pos-billing/static/js/main.aedfb5b7.js.map",
     "239.611fd2dc.chunk.js.map": "/pos-billing/static/js/239.611fd2dc.chunk.js.map",
     "977.31f774cd.chunk.js.map": "/pos-billing/static/js/977.31f774cd.chunk.js.map",
     "455.85ef5917.chunk.js.map": "/pos-billing/static/js/455.85ef5917.chunk.js.map",
@@ -16,6 +16,6 @@
   },
   "entrypoints": [
     "static/css/main.d06e71a6.css",
-    "static/js/main.876ff8d0.js"
+    "static/js/main.aedfb5b7.js"
   ]
 }

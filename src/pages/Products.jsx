@@ -9,7 +9,7 @@ import CategoryModal from "../components/CategoryModal";
 export default function ProductsPage() {
   const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState(["Beverages", "Snacks", "Dairy"]);
+  const [categories, setCategories] = useState(["Mens Wears", "Footwear", "Plastic item", "Kids wear", "Girls wear", "Saree", "Suit piece", "Steel item", "House Holds"]);
   const [search, setSearch] = useState("");
 
   const [form, setForm] = useState({

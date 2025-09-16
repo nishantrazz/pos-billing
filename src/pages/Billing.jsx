@@ -102,6 +102,16 @@ function Billing() {
   // ✅ Totals
   const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
   const total = subtotal - discount;
+  
+  // Update qty or price inside cart
+const updateCart = (id, field, value) => {
+  setCart((prevCart) =>
+    prevCart.map((item) =>
+      item.id === id ? { ...item, [field]: value } : item
+    )
+  );
+};
+
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col">
@@ -171,9 +181,37 @@ function Billing() {
                 {cart.map((item) => (
                   <tr key={item.id}>
                     <td className="p-2 border">{item.name}</td>
-                    <td className="p-2 border">{item.qty}</td>
-                    <td className="p-2 border">₹{item.price}</td>
+
+                    {/* Editable Qty */}
+                    <td className="p-2 border">
+                      <input
+                        type="number"
+                        min="1"
+                        value={item.qty}
+                        onChange={(e) =>
+                          updateCart(item.id, "qty", parseInt(e.target.value) || 1)
+                        }
+                        className="w-16 border rounded px-1 text-center"
+                      />
+                    </td>
+
+                    {/* Editable Price */}
+                    <td className="p-2 border">
+                      <input
+                        type="number"
+                        min="0"
+                        value={item.price}
+                        onChange={(e) =>
+                          updateCart(item.id, "price", parseFloat(e.target.value) || 0)
+                        }
+                        className="w-20 border rounded px-1 text-center"
+                      />
+                    </td>
+
+                    {/* Auto-calculated Subtotal */}
                     <td className="p-2 border">₹{item.price * item.qty}</td>
+
+                    {/* Delete */}
                     <td className="p-2 border">
                       <button
                         onClick={() => removeFromCart(item.id)}
@@ -187,6 +225,7 @@ function Billing() {
               </tbody>
             </table>
           </div>
+
 
           {/* Totals */}
           <div className="mt-auto">

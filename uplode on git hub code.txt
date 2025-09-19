@@ -1,0 +1,5 @@
+
+ git add .
+git commit -m "Added custom 404 redirect page with loader"
+git push origin main
+npm run deploy  

@@ -10,12 +10,10 @@ const ThermalBill = () => {
   const [customer, setCustomer] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Fetch invoice + items + customer
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        // Invoice
         const { data: invoiceData, error: invoiceError } = await supabase
           .from("invoices")
           .select("*")
@@ -25,7 +23,6 @@ const ThermalBill = () => {
 
         setInvoice(invoiceData);
 
-        // Invoice items
         const { data: itemData, error: itemError } = await supabase
           .from("invoice_items")
           .select("*, products(name)")
@@ -34,7 +31,6 @@ const ThermalBill = () => {
 
         setItems(itemData);
 
-        // Customer (if any)
         if (invoiceData.customer_id) {
           const { data: custData } = await supabase
             .from("customers")
@@ -48,7 +44,6 @@ const ThermalBill = () => {
       }
       setLoading(false);
 
-      // Auto open print dialog after load
       setTimeout(() => window.print(), 600);
     };
 
@@ -66,30 +61,43 @@ const ThermalBill = () => {
     <div
       className="mx-auto p-4 bg-white"
       style={{
-        maxWidth: "80mm", // for thermal, fits roll width
+        maxWidth: "80mm",
         fontFamily: "monospace",
         fontSize: "12px",
+        color: "#000",
       }}
     >
-      {/* Header */}
-      <div className="text-center mb-2">
-        <h2 className="text-base font-bold">My Store</h2>
-        <p className="text-xs">GSTIN: 29ABCDE1234F2Z5</p>
-        <p className="text-xs">123, Main Road, City</p>
+      {/* Header with logo + store info */}
+     <div className="flex items-center justify-between mb-2">
+        <img src="/logo.png" alt="Logo" className="w-12 h-12" />
+        <div className="text-right">
+          <h2 className="text-base font-bold">B2 Wholesale Mega Mart</h2>
+          <p className="text-xs">Sohsarai, Nalanda, Bihar, 803101</p>
+          <p className="text-xs">GSTIN: 10AJPPG8120K1ZC</p>
+          <p className="text-xs">Mobile No.: 6204595801</p>
+        </div>
       </div>
-      <hr />
+      <hr className="border-black" />
 
       {/* Invoice info */}
-      <p className="text-xs">
-        Invoice: {invoice.invoice_number} <br />
-        Date: {new Date(invoice.created_at).toLocaleString()} <br />
-        Customer: {customer ? customer.name : "Walk-in Customer"}
-      </p>
-      <hr />
+      <div className="my-2 text-xs">
+        <p>
+          <span className="font-bold">Invoice:</span> {invoice.invoice_number}
+        </p>
+        <p>
+          <span className="font-bold">Date:</span>{" "}
+          {new Date(invoice.created_at).toLocaleString()}
+        </p>
+        <p>
+          <span className="font-bold">Customer:</span>{" "}
+          {customer ? customer.name : "Walk-in Customer"}
+        </p>
+      </div>
+      <hr className="border-black" />
 
-      {/* Items table */}
-      <table className="w-full text-xs">
-        <thead>
+      {/* Items */}
+      <table className="w-full text-xs my-2">
+        <thead className="border-b border-black">
           <tr>
             <th className="text-left">Item</th>
             <th className="text-center">Qty</th>
@@ -110,24 +118,31 @@ const ThermalBill = () => {
           ))}
         </tbody>
       </table>
-      <hr />
+      <hr className="border-black" />
 
       {/* Totals */}
-      <div className="text-xs">
+      <div className="text-xs my-2">
         <p>Subtotal: ₹{subtotal.toFixed(2)}</p>
         <p>Discount: ₹{discount.toFixed(2)}</p>
-        <p className="font-bold">Grand Total: ₹{total.toFixed(2)}</p>
+        <p className="font-bold text-lg text-black">
+          GRAND TOTAL: ₹{total.toFixed(2)}
+        </p>
       </div>
-      <hr />
+      <hr className="border-black" />
 
-      <p className="text-center text-xs mt-2">*** Thank You! Visit Again ***</p>
+      {/* Footer */}
+      <div className="text-center text-xs mt-2">
+        <p>⚠ No return, no refund</p>
+        <p>✔ Only exchange within 3 days</p>
+        <p className="mt-2 font-bold">*** Thank You! Visit Again ***</p>
+      </div>
 
-      {/* Print button for manual printing */}
+      {/* Print button */}
       <button
-        className="w-full mt-2 bg-blue-600 text-white py-1 rounded text-xs print:hidden"
+        className="w-full mt-2 bg-black text-white py-1 rounded text-xs print:hidden"
         onClick={() => window.print()}
       >
-        Print Bill
+        🖨 Print Bill
       </button>
     </div>
   );

@@ -399,7 +399,8 @@ const updateCart = (id, field, value) => {
                   className="bg-white shadow-sm rounded-lg p-3 cursor-pointer hover:shadow-md transition text-center"
                 >
                   <img
-                    src={product.image || "https://via.placeholder.com/80"}
+                    src={product.image }
+                    
                     alt={product.name}
                     className="h-16 w-full object-contain mx-auto mb-2"
                   />
